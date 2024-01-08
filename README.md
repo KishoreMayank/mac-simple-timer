@@ -1,7 +1,5 @@
-### Commnads to Run
+### Commands to Run
 npm init -y
-
-npm install electron --save-dev
 
 chmod +x start-app.sh
 
