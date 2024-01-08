@@ -1,9 +1,35 @@
-const { app, Menu, Tray } = require('electron');
+const { app, Tray, BrowserWindow, Menu } = require('electron'); // Import Menu
 let tray = null;
+let win = null;
 
 app.whenReady().then(() => {
-  tray = new Tray('logo.png'); // No icon
-  tray.setTitle('10:00'); // Initial timer display
+  win = new BrowserWindow({
+    show: false,
+    skipTaskbar: true
+  });
+
+  if (app.dock) {
+    app.dock.hide();
+  }
+
+  tray = new Tray('logo.png');
+  tray.setTitle('10:00');
+
+  // Create a context menu for the tray
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Quit',
+      click: function() {
+        app.quit();
+      }
+    }
+  ]);
+
+  // Only show the context menu on right-click
+  tray.on('right-click', () => {
+    tray.popUpContextMenu(contextMenu);
+  });
+
   tray.on('click', () => {
     if (timerInterval) {
       resetTimer();
@@ -12,6 +38,7 @@ app.whenReady().then(() => {
     }
   });
 });
+
 
 let timer = 600; // 10 minutes in seconds
 let timerInterval = null;

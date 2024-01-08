@@ -3,6 +3,6 @@ npm init -y
 
 npm install electron --save-dev
 
-npm install electron-packager --save-dev
+chmod +x start-app.sh
 
-npx electron-packager . --overwrite     
+./start-app.sh
