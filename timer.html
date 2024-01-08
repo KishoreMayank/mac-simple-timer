@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Timer</title>
+</head>
+<body>
+  <h1 id="timer-display">10:00</h1>
+  <!-- Add JavaScript to update this timer -->
+  <script>
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.on('timer-update', (event, timer) => {
+      document.getElementById('timer-display').innerText = `${Math.floor(timer / 60)}:${timer % 60 < 10 ? '0' : ''}${timer % 60}`;
+    });
+  </script>
+</body>
+</html>
