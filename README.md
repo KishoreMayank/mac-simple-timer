@@ -1,5 +1,8 @@
 ### Commnads to Run
 npm init -y
+
 npm install electron --save-dev
-npm install electron-packager -g
-electron-packager . --platform=darwin --arch=arm64
+
+npm install electron-packager --save-dev
+
+npx electron-packager . --overwrite     
